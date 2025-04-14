@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Home Section (Hero) -->
+<section id="home" class="hero">
+    <div class="hero-content">
+        <h2>{{hero_intro}}</h2>
+        <p>{{hero_sub_intro}}</p>
+        <a href="#projects" class="btn">View My Projects</a>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about">
+    <div class="about-container">
+        <h2>{{ title[0] }}</h2> <!-- title[0] is About me -->
+        <div class="about-grid">
+            <!-- About me -->
+            <div class="about-text">
+                <p>{{ aboutme | safe }}</p> <!-- should be unber 200 words -->
+            </div>
+            <!-- Profile-image -->
+            <div class="profile-image">
+                <img src="{{ url_for('static',filename='images/param.jpeg') }}" alt="Profile Image" class="card-image">
+                <div class="profile-content">
+                    <h4><b>Param Savalia</b></h4>
+                    <p>IT tech. Support</p>
+                </div>
+            </div>
+            <!-- About-Skill -->
+            <div class="skill-container">
+                <div class="about-skills">
+                    <h3>{{ title[1] }}</h3> <!-- title[1] is Skills -->
+                    {% for skill in about %}
+                    <ul>
+                        <li>
+                            <b>{{ skill.title }} :</b>{{ skill.skills }}
+                        </li>
+                    </ul>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section (Hierarchical Grid) -->
+<section id="projects">
+    <h2>{{ title[2] }}</h2> <!-- title[2] is My Projects -->
+    <div class="project-grid">
+        <!-- Featured Project (Larger)
+        <div class="project featured">
+            <img src="{{ url_for('static', filename='images/portfolio-screenshot.jpg') }}" alt="Portfolio Screenshot">
+            <div class="project-content">
+                <h3>Portfolio Website</h3>
+                <p>Built a personal portfolio website using Python and Flask to showcase my skills and projects.
+                    Features a clean design with a hierarchical grid layout.</p>
+            </div>
+        </div>-->
+
+        <!-- Secondary Projects (Smaller) -->
+        <div class="project">
+            <a href="https://github.com/ParamSavalia/Othello.git" target="_blank">
+                <img src="{{ url_for('static', filename='images/Othello.jpg') }}" alt="Project 1">
+            </a>
+            <div class="project-content">
+                <h3>Othello Game</h3>
+                <p>The Othello game is built in Java, with the user interface entirely designed from the ground up using JAP.</p>
+            </div>
+        </div>
+
+        <div class="project">
+            <a href="https://github.com/ParamSavalia/Motor-Vehicle-Collision-.git" target="_blank">
+            <img src="{{ url_for('static', filename='images/Motor Vehicle Collisions.png') }}" alt="Project 2">
+            </a>
+            <div class="project-content">
+                <h3>Motor Vehicle Collisions</h3>
+                <p>The dataset was cleaned to reduce redundancy, and classification using KNN and Decision
+                    Tree showed that non-fatal accidents occurred twice as often as fatal ones.</p>
+
+            </div>
+        </div>
+
+        <div class="project">
+            <img src="{{ url_for('static', filename='images/Othello.jpg') }}" alt="Project 3">
+            <div class="project-content">
+                <h3>Othello Game</h3>
+                <p>fgfgbf</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact">
+    <h2>{{ title[3] }}</h2> <!-- title[3] is Contact Me -->
+    <p>Feel free to reach out if you’d like to discuss opportunities or learn more about my work.</p>
+    <form method="POST">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required></textarea>
+        </div>
+        <button type="submit" class="btn">Send Message</button>
+    </form>
+    <div class="success-message" style="display: {% if request.method == 'POST' %}block{% else %}none{% endif %};">
+        <p>Thank you for your message! I’ll get back to you soon.</p>
+    </div>
+    <h3>Other Ways to Connect</h3>
+    <p>Email: <a href="paramsavalia7@gmail.com"> <i>paramsavalia7@gmail.com</i> </a></p>
+    <p>LinkedIn:<a href="https://www.linkedin.com/in/paramsavalia/"><i>/paramsavalia</i> </a></p>
+</section>
+{% endblock %}
